@@ -6,8 +6,15 @@ import { Todo } from "../entities/todo.entity";
 
 export const createTodo = async(req: Request, res: Response) => {
     try {
-        const user = await Todo.create(req.body);
-        console.log(user);
+        const {title, description, status } = req.body;
+
+        console.log(req.body);
+        const newTodo = new Todo(); // Create a new instance of Todo
+        newTodo.title = title;
+        newTodo.description = description;
+        newTodo.status = status;
+        await newTodo.save();
+        console.log(newTodo);
         res.send('Todo added in list successfully')
     } catch (error) {
         if (error instanceof Error) {
@@ -68,7 +75,9 @@ export const updateTodo = async(req: Request, res: Response) => {
 export const deleteTodo = async (req: Request, res: Response) => {
     try {
         const id = parseInt(req.params.id);
+        console.log('dis', id)
         const user = await Todo.findOneBy({ id });
+        console.log('user', user);
         if (!user) {
             res.status(404).json({ message: 'User does not exist' });
         } else {

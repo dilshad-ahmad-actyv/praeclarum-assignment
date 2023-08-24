@@ -2,6 +2,7 @@ import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, U
 import { IsBoolean, IsNotEmpty} from 'class-validator';
 @Entity({name: 'todos'})
 export class Todo extends BaseEntity{
+
     @PrimaryGeneratedColumn()
     id: number
 
