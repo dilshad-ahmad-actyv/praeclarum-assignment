@@ -12,9 +12,9 @@ exports.AppDataSource = new typeorm_1.DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,
-    username: 'postgres',
-    password: 'password',
-    database: 'typescript_psql_crud',
+    username: process.env.PSQL_USERNAME,
+    password: process.env.PSQL_PASSWORD,
+    database: process.env.PSQL_DATABASE,
     entities: [
         todo_entity_1.Todo
     ],
