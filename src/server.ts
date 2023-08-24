@@ -1,10 +1,22 @@
-import express from 'express';
 import dotenv from 'dotenv';
-const app = express();
+import app from './app';
+import { AppDataSource } from './connection/db.connection';
+
 dotenv.config();
 
 const port = process.env.PORT || 3001;
 
-app.listen(port, () => {
-    console.log(`Server is running on the port ${port}`);
-})
+async function main() {
+    try {
+       await AppDataSource.initialize();
+       console.log("Data Source has been initialized!")
+        app.listen(port, () => {
+            console.log(`Server is running on the port ${port}`);
+        })
+    } catch (error) {
+        console.error("Error during Data Source initialization", error)
+    }
+}
+
+main();
+
